@@ -1,0 +1,45 @@
+{
+    "status": "ok",
+    "totalResults": 38,
+    "articles": [
+        {
+            "source": {
+                "id": "the-wall-street-journal",
+                "name": "The Wall Street Journal"
+            },
+            "author": "Dov Lieber, Laurence Norman, Zvi Smith, Lindsay Wise, Stephen Kalin, Anat Peled, Saleh al-Batati, David Uberti, Benoit Faucon, WSJ Staff",
+            "title": "Live Updates: Israel and Iran Launch New Attacks; Trump Nixed Israeli Plan to Kill Iran’s Khamenei - WSJ",
+            "description": "Israel’s military said it hit command centers of Iran’s Revolutionary Guard, while Iranian strikes overnight killed several people.",
+            "url": "https://www.wsj.com/livecoverage/israel-iran-attack-news",
+            "urlToImage": "https://images.wsj.net/im-15602085/social",
+            "publishedAt": "2025-06-16T10:12:00Z",
+            "content": "Israels military said it had hit command centers of Irans Revolutionary Guard, following days of attacks focused on Tehrans nuclear program, senior leadership and infrastructure. Iranian strikes over… [+903 chars]"
+        },
+        {
+            "source": {
+                "id": "the-washington-post",
+                "name": "The Washington Post"
+            },
+            "author": "Chelsea Janes",
+            "title": "Red Sox trade Rafael Devers to Giants in stunning MLB blockbuster - The Washington Post",
+            "description": "Devers signed a contract extension in 2023 that seemingly cemented him as the face of the Red Sox, but his relationship with the team deteriorated when he was asked to change positions.",
+            "url": "https://www.washingtonpost.com/sports/2025/06/15/rafael-devers-trade-red-sox-giants/",
+            "urlToImage": "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/3ZCMGCZG43EGFHDH7BW7KMFA6Q.jpg&w=1440",
+            "publishedAt": "2025-06-16T09:57:04Z",
+            "content": "In a mid-June deal stunning for both its timing and the caliber of the players included, the Boston Red Sox traded recently beleaguered designated hitter Rafael Devers to the San Francisco Giants, th… [+4099 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "BBC News"
+            },
+            "author": "Christine Ro",
+            "title": "The people who are 'allergic' to humans - BBC",
+            "description": "Some people are allergic to others – but the mystery of how this works is only just starting to be unravelled.",
+            "url": "https://www.bbc.com/future/article/20250613-the-people-who-are-allergic-to-humans",
+            "urlToImage": "https://ychef.files.bbci.co.uk/624x351/p0lj4w8y.jpg",
+            "publishedAt": "2025-06-16T09:15:56Z",
+            "content": "Some people are allergic to others but the mystery of how this works is only just starting to be unravelled.\r\nMaura believes condoms saved her life.\r\nNow 43 and living in Ohio, US, Maura says the pro… [+13776 chars]"
+        }
+    ]
+}
