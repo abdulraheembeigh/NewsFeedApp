@@ -32,14 +32,14 @@ struct ArticleDetailView: View {
                 }
                 
                 HStack {
-                    Button {
-                        if let url = URL(string: article.url) {
-                            openURL(url)
-                        }
-                    } label: {
-                        Label("Read Article", systemImage: "safari")
-                    }
-                    .buttonStyle(.borderedProminent)
+                    Button(action: {
+                        print("Floating Button Click")
+                    }, label: {
+                        NavigationLink(destination: WebView(urlString: article.url)) {
+                            Label("Read Article", systemImage: "safari")
+                         }
+                    })
+                    .buttonStyle(.bordered)
                     Spacer()
                     if isFromSavedList {
                         Button(role: .destructive) {
