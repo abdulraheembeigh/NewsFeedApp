@@ -9,6 +9,14 @@ final class ImageCacheManager {
     static let shared = ImageCacheManager()
     private let urlCache: URLCache
     private let memoryCache = NSCache<NSString, UIImage>()
+    init(customCache: URLCache? = nil) {
+        self.urlCache = customCache ?? URLCache(
+            memoryCapacity: 100 * 1024 * 1024,
+            diskCapacity: 200 * 1024 * 1024,
+            diskPath: "image_cache"
+        )
+        URLCache.shared = self.urlCache
+    }
     
     private init() {
         // Create custom URLCache with larger capacity
@@ -27,20 +35,14 @@ final class ImageCacheManager {
     }
     
     func cachedImage(for url: URL) -> UIImage? {
-        let urlString = url.absoluteString
         
-        // Check memory cache first (fastest)
-        if let memoryImage = memoryCache.object(forKey: urlString as NSString) {
-            return memoryImage
+        if let mem = memoryCache.object(forKey: url.absoluteString as NSString) {
+            return mem
         }
-        
-        // Check URL cache (disk)
         let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad)
-        if let cachedResponse = urlCache.cachedResponse(for: request),
-           let image = UIImage(data: cachedResponse.data) {
-            
-            // Store back in memory cache for faster access
-            memoryCache.setObject(image, forKey: urlString as NSString, cost: cachedResponse.data.count)
+        if let disk = urlCache.cachedResponse(for: request),
+           let image = UIImage(data: disk.data) {
+            memoryCache.setObject(image, forKey: url.absoluteString as NSString, cost: disk.data.count)
             return image
         }
         return nil
@@ -82,10 +84,8 @@ final class ImageCacheManager {
             userInfo: nil,
             storagePolicy: .allowed  // Allow both memory and disk storage
         )
-        
         urlCache.storeCachedResponse(cachedResponse, for: request)
     }
-    
     
     func clearCache() {
         memoryCache.removeAllObjects()

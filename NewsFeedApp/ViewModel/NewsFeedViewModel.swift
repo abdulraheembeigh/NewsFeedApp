@@ -6,12 +6,7 @@
 //
 
 import Foundation
-// MARK: - Category Enum
-enum NewsCategory: String, CaseIterable, Identifiable {
-    case business, entertainment, general, health, science, sports, technology
-    var id: String { rawValue }
-    var displayName: String { rawValue.capitalized }
-}
+
 @Observable
 @MainActor
 class NewsFeedViewModel {

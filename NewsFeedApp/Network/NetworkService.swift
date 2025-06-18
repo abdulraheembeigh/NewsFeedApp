@@ -13,6 +13,7 @@ protocol NetworkServiceProtocol {
 
 class NetworkService: NetworkServiceProtocol {
     private let urlSession: URLSession
+    
     //default initialition of 150 MB
     init(urlSession: URLSession = URLSession.shared, cacheCapacity: Int = 150 * 1024 * 1024) {
         let cache = URLCache.shared
@@ -24,6 +25,7 @@ class NetworkService: NetworkServiceProtocol {
         configuration.requestCachePolicy = .returnCacheDataElseLoad
         self.urlSession = urlSession
     }
+    
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T {
         var request = try endpoint.getURLRequest()
         request.cachePolicy = .returnCacheDataElseLoad

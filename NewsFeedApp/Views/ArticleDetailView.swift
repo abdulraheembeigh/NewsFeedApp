@@ -19,24 +19,8 @@ struct ArticleDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                if let urlString = article.urlToImage, let url = URL(string: urlString) {
-                    CacheAsyncImage(url: url) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(10)
-                                .clipped()
-                        case .failure(let error):
-                            Text("Error: \(error.localizedDescription)")
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
+                LoadImage(article: article)
+                    .frame(width: 350.0)
                 
                 Text(article.title)
                     .font(.title)
@@ -56,7 +40,7 @@ struct ArticleDetailView: View {
                         Label("Read Article", systemImage: "safari")
                     }
                     .buttonStyle(.borderedProminent)
-                    
+                    Spacer()
                     if isFromSavedList {
                         Button(role: .destructive) {
                             if let saved = try? context.fetch(FetchDescriptor<SavedArticle>()).first(where: { $0.url == article.url }) {

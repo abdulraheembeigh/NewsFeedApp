@@ -13,3 +13,21 @@ enum NetworkError: Error {
     case decodingError
     case unknownError
 }
+
+
+// MARK: - User-Friendly Error Messages
+extension NetworkError: LocalizedError {
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "Invalid web address"
+        case .httpError(let statusCode):
+            return "Bad request with status code: \(statusCode)"
+        case .decodingError:
+            return "Unable to process image"
+        case .unknownError:
+            return "Something went wrong"
+        }
+    }
+}

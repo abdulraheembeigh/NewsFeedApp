@@ -16,8 +16,8 @@ struct SavedArticlesView: View {
         NavigationStack {
             List {
                 ForEach(savedArticles) { article in
-                    let destination = Article(title: article.title, description: article.articleDescription, url: article.url, urlToImage: article.urlToImage, publishedAt: article.publishedAt, content: article.content)
-                    NavigationLink(destination: ArticleDetailView(article: destination, isFromSavedList: true)) {
+                    let destinationArticle = Article(title: article.title, description: article.articleDescription, url: article.url, urlToImage: article.urlToImage, publishedAt: article.publishedAt, content: article.content)
+                    NavigationLink(destination: ArticleDetailView(article: destinationArticle, isFromSavedList: true)) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(article.title)
                                 .font(.headline)

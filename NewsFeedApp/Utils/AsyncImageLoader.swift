@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+
+
 // MARK: - Custom Async Image Loader
 @MainActor
 @Observable
@@ -17,12 +19,14 @@ final class AsyncImageLoader {
     
     private var loadTask: Task<Void, Never>?
     private let cacheManager = ImageCacheManager.shared
-    
-    // Store task reference for nonisolated access
     private let taskStorage = TaskStorage()
+    private let session: URLSessionProtocol
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
+        self.session = session
+    }
     
     func loadImage(from url: URL) {
-        // Cancel any existing task
         loadTask?.cancel()
         taskStorage.cancel()
         
@@ -33,37 +37,30 @@ final class AsyncImageLoader {
             return
         }
         
-        // Load from network
         self.isLoading = true
         self.error = nil
         
         let task = Task { @MainActor in
             do {
-                let (data, response) = try await URLSession.shared.data(from: url)
+                let (data, response) = try await session.data(from: url)
                 
-                // Check if task was cancelled
                 try Task.checkCancellation()
                 
-                // Validate response
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw URLError(.badServerResponse)
                 }
                 
-                // Create image from data
                 guard let loadedImage = UIImage(data: data) else {
                     throw URLError(.cannotDecodeContentData)
                 }
                 
-                // Cache the original data (not the SwiftUI Image)
                 cacheManager.cacheImage(data: data, for: url)
                 
-                // Update UI
                 self.image = loadedImage
                 self.isLoading = false
-                
             } catch is CancellationError {
-                // Task was cancelled, don't update state
+                self.isLoading = false
                 return
             } catch {
                 self.error = error

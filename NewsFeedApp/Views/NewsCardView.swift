@@ -12,34 +12,23 @@ struct NewsCardView: View {
     var body: some View {
         NavigationLink(destination: ArticleDetailView(article: article)) {
             ZStack(alignment: .bottom) {
-                if let imageUrl = article.urlToImage, let url = URL(string: imageUrl) {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 340, height: 260)
-                            .clipped()
-                    } placeholder: {
-                        Color.gray.opacity(0.3)
-                            .frame(width: 340, height: 260)
-                    }
-                } else {
-                    Color.gray.opacity(0.3)
-                        .frame(width: 340, height: 260)
-                }
+                LoadImage(article: article)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(article.title)
                         .font(.headline)
                         .foregroundColor(.white)
+                        .multilineTextAlignment(.leading)
                         .lineLimit(2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: 300.0)
                     
                     if let desc = article.description {
                         Text(desc)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
+                            .multilineTextAlignment(.leading)
                             .lineLimit(2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(width: 300.0)
                     }
                 }
                 .padding(10)
